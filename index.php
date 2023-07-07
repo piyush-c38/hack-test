@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@300&display=swap" rel="stylesheet">
@@ -54,14 +53,30 @@
             </ul>
         </nav>
     </nav>
+<?php
+    $file = fopen('blog.txt','r');
+    $date = rtrim(fgets($file));
 
-    <article>
-        <h2 id="blog-heading">Input the Blog-Heading here</h2>
-        <h3 id="blog-date">Input the date here</h3>
-        <p id="blog-content">
-            Input the blog-content here.
+    $blog_heading = rtrim(fgets($file));
+    while (strlen($test = rtrim(fgets($file)))!=0){
+    $blog_heading = $blog_heading."</br>".$test;
+    }
+
+    $blog_content = rtrim(fgets($file));
+    while (!feof($file)){
+    $blog_content = $blog_content."</br>".rtrim(fgets($file));
+    }
+
+    fclose($file);
+
+    echo "<article>
+        <h2 id=\"blog-heading\">$blog_heading</h2>
+        <h3 id=\"blog-date\">$date</h3>
+        <p id=\"blog-content\">
+            $blog_content
         </p>
-    </article>
+    </article>"
+?>
 </body>
 
 </html>
